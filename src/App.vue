@@ -1,19 +1,24 @@
 <template>
   <div id="app">
-    <h1>Adivina el Pokémon</h1>
-    <p>¡Intenta descubrir todos los Pokémon!</p>
-    <p>Pokémon descubiertos: {{ discoveredCount }}/20</p>
-    <!-- Contenedor de Pokémon usando CSS Grid para organizarlos en filas de 5 -->
+    <header>
+      <h1>Adivina el</h1>
+      <img src="../public/International_Pokémon_logo.svg.png" alt="" srcset="">
+      <p>¡Intenta descubrir todos los Pokémon!</p>
+
+      <!-- Muestra el contador de Pokémon descubiertos de un total de 20 -->
+      <p>Pokémon descubiertos: {{ discoveredCount }}/20</p>
+    </header>
+    
+    <!-- Contenedor de tarjetas de Pokémon usando CSS Grid para organizar en filas de 5 columnas -->
     <div class="pokemon-container">
+    <!-- Renderiza el componente PokemonCard para cada Pokémon en el array 'pokemons' -->  
       <PokemonCard
         v-for="(pokemon, index) in pokemons"
-        :key="index"
+        :key="index" 
         :pokemon="pokemon"
         @pokemonDiscovered="incrementCounter"
       />
     </div>
-
-   
   </div>
 </template>
 
@@ -27,11 +32,12 @@ export default {
   },
   data() {
     return {
-      pokemons: [],
-      discoveredCount: 0,
+      pokemons: [],// Array para almacenar los datos de los 20 Pokémon obtenidos
+      discoveredCount: 0, // Contador de Pokémon descubiertos
     };
   },
   methods: {
+    // Método para obtener la lista de 20 Pokémon y sus detalles desde la PokeAPI
     async fetchPokemons() {
       try {
         const response = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=20');
@@ -48,10 +54,12 @@ export default {
         console.error('Error al obtener los Pokémon:', error);
       }
     },
+    // Método que incrementa el contador de Pokémon descubiertos cuando el usuario adivina correctamente
     incrementCounter() {
       this.discoveredCount += 1;
     },
   },
+  // Ejecuta el método fetchPokemons() cuando el componente se crea
   created() {
     this.fetchPokemons();
   },
@@ -71,6 +79,9 @@ export default {
   grid-template-columns: repeat(5, 1fr); /* Divide en 5 columnas */
   gap: 20px; /* Espacio entre las tarjetas */
   justify-items: center; /* Centra las tarjetas en cada celda */
+}
+header img{
+  width: 30%;
 }
 </style>
 
