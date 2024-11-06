@@ -34,8 +34,8 @@ Para comenzar a trabajar con este proyecto, sigue los siguientes pasos:
 ## Estructura de Archivos
 ```bash
 src/
-├── assets/           # Archivos estáticos e imágenes
-├── components/       # Componentes Vue
-│   └── PokemonCard.vue  # Componente para mostrar detalles de cada Pokémon
-├── App.vue           # Componente raíz
-└── main.js           # Archivo de entrada principal
+├── assets/
+├── components/
+│   └── PokemonCard.vue
+├── App.vue
+└── main.js
